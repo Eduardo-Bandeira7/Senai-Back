@@ -1,0 +1,15 @@
+C:\Users\Usuario\Documents\SENAI\back\er2\bin\Debug\net6.0\er2.exe
+C:\Users\Usuario\Documents\SENAI\back\er2\bin\Debug\net6.0\er2.deps.json
+C:\Users\Usuario\Documents\SENAI\back\er2\bin\Debug\net6.0\er2.runtimeconfig.json
+C:\Users\Usuario\Documents\SENAI\back\er2\bin\Debug\net6.0\er2.dll
+C:\Users\Usuario\Documents\SENAI\back\er2\bin\Debug\net6.0\er2.pdb
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.AssemblyInfoInputs.cache
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.AssemblyInfo.cs
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.dll
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\refint\er2.dll
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.pdb
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\er2.genruntimeconfig.cache
+C:\Users\Usuario\Documents\SENAI\back\er2\obj\Debug\net6.0\ref\er2.dll

@@ -52,8 +52,12 @@ do
             Console.WriteLine(@$"
     Nome: {novaPf.Nome}
     Endereço: {novaPf.Endereco.Logradouro}, {novaPf.Endereco.Numero}
-    Maior de Idade: {metodosPf.ValidarDataNasc(novaPf.DataNasc)}
+    Maior de Idade: {(metodosPf.ValidarDataNasc(novaPf.DataNasc) ? "Sim" : "Não")}
+    Imposto a ser pago: {metodosPf.PagarImposto(novaPf.Rendimento).ToString("C")}
 ");
+
+            // IF TERNÁRIO = Consição ? "Sim" : "Não" só verifica se for verdadeiro ou falso
+
             //          Console.WriteLine($"Nome: {novaPf.Nome} Nome: {novaPf.Nome}");//Interpolação
             //           Console.WriteLine("Nome: " + novaPf.Nome + " Nome: " + novaPf.Nome);//Concatenção
 
@@ -88,7 +92,7 @@ do
     Nome: {novaPj.Nome}
     Endereço: {novaPj.Endereco.Logradouro} N°: {novaPj.Endereco.Numero}
     Razão Social: {novaPj.RazaoSocial}
-    CNPJ: {novaPj.Cnpj}, Valido: {metodosPj.ValidarCnpj(novaPj.Cnpj)}
+    CNPJ: {novaPj.Cnpj}, Valido: {(metodosPj.ValidarCnpj(novaPj.Cnpj) ? "Sim" : "Não")} 
     Complemento: {novaPj.Endereco.Complemento}
 ");
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -100,7 +104,7 @@ do
         case "0":
             Console.Clear();
             Console.WriteLine($"Obrigado por utilizar nosso Sistema!");
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             Utils.LoadingBar("Finalizando", 500, 6);
             break;
 

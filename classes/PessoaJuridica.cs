@@ -11,7 +11,22 @@ namespace er2.classes
 
         public override float PagarImposto(float rendimento)
         {
-            throw new NotImplementedException();
+            if (rendimento <= 3000)
+            {
+                return rendimento * .03f; // mesma coisa que rendimento / 100 * 2;
+            }
+            else if (rendimento <= 6000)
+            {
+                return rendimento * .05f; // rendimento / 100 * 5;
+            }
+            else if (rendimento <= 10000)
+            {
+                return rendimento * .07f; // rendimento / 100 * 7;
+            }
+            else
+            {
+                return rendimento * .09f; // rendimento / 100 * 9;
+            }
         }
 
         //xx.xxx.xxx/0001-xx...............xxxxxxxx0001xx

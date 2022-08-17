@@ -9,6 +9,8 @@ namespace er2.classes
 
         public string? RazaoSocial { get; set; }
 
+        public string Caminho { get; private set; } = "Database/PessoaJuridica.csv";
+
         public override float PagarImposto(float rendimento)
         {
             if (rendimento <= 3000)
@@ -57,5 +59,36 @@ namespace er2.classes
             }
             return false;
         }
+
+        public void inserir(PessoaJuridica pj)
+        {
+            Utils.VerificarPastaArquivo(Caminho);
+
+            string[] pjstings = { $"{pj.Nome},{pj.Cnpj},{pj.RazaoSocial},{pj.Endereco.Logradouro}," };
+
+            File.AppendAllLines(Caminho, pjstings);
+        }
+
+        public List<PessoaJuridica> LerArquivo()
+        {
+            List<PessoaJuridica> ListaPj = new List<PessoaJuridica>();
+
+            string[] linhas = File.ReadAllLines(Caminho);
+
+            foreach (string cadaLinha in linhas)
+            {
+                string[] atributos = cadaLinha.Split(",");
+
+                PessoaJuridica cadaPj = new PessoaJuridica();
+
+                cadaPj.Nome = atributos[0];
+                cadaPj.Cnpj = atributos[1];
+                cadaPj.RazaoSocial = atributos[2];
+
+                ListaPj.Add(cadaPj);
+            }
+            return ListaPj;
+        }
+
     }
 }

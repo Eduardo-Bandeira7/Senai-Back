@@ -2,13 +2,19 @@
 
 Console.Clear();
 Console.WriteLine(@$"
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█
+█░░║║║╠─║─║─║║║║║╠─░░█
+█░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 |    Bem vindo ao Sistema de Cadastro de |
 |       Pessosas Físicas e Jurídcas      |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    
 ");
 
-Utils.LoadingBar("Iniciando", 100, 40);
+Utils.LoadingBar("Iniciando", 100, 20);
 
 List<PessoaFisica> listaPf = new List<PessoaFisica>();
 List<PessoaJuridica> listaPj = new List<PessoaJuridica>();
@@ -61,7 +67,7 @@ do
                         PessoaFisica novaPf = new PessoaFisica();
                         Endereco novoEndPf = new Endereco();
 
-                        Console.WriteLine($"Digite o nome da pessoa fisica que deseja cadastrar:");
+                        Console.WriteLine($"Insira o nome que deseja cadastrar:");
                         novaPf.Nome = Console.ReadLine();
 
                         bool DataValida;
@@ -118,6 +124,15 @@ do
 
                         listaPf.Add(novaPf);
 
+                        // StreamWriter sw = new StreamWriter($"{novaPf.Nome}.txt"); //cria um arquivo .txt
+                        // sw.WriteLine(novaPf.Nome); //escreve dentro do arquivo
+                        // sw.Close(); // fecha o arquivo
+
+                        using (StreamWriter sw = new StreamWriter($"{novaPf.Nome}.txt"))
+                        {
+                            sw.WriteLine(novaPf.Nome);
+                        }
+
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine($"Cadastro realizado com sucesso!");
                         Console.ResetColor();
@@ -149,6 +164,17 @@ do
                             Console.WriteLine($"Lista vazia :/");
                             Thread.Sleep(3000);
                         }
+
+                        using (StreamReader sr = new StreamReader("Carlos.txt"))
+                        {
+                            string linha;
+                            while ((linha = sr.ReadLine()) != null)
+                            {
+                                Console.WriteLine($"{linha}");
+                            }
+                        }
+                        Console.WriteLine($"Aprete ENTER para continuar");
+                        Console.ReadLine();
                         break;
 
                     case "0":
@@ -203,8 +229,29 @@ do
                         Console.WriteLine($"Digite Seu Nome:");
                         novaPj.Nome = Console.ReadLine();
 
-                        Console.WriteLine($"Digite seu CNPJ:");
-                        novaPj.Cnpj = Console.ReadLine();
+                        bool CnpjVal;
+
+                        do
+                        {
+                            Console.WriteLine($"Digite seu CNPJ:");
+                            string? ValCnpj = Console.ReadLine();
+
+                            CnpjVal = metodosPj.ValidarCnpj(ValCnpj);
+
+                            if (CnpjVal)
+                            {
+                                novaPj.Cnpj = ValCnpj;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine($"Cnpj iválido! Favor insira um cnpj válido");
+                                Console.ResetColor();
+                                Thread.Sleep(3000);
+                            }
+
+                        } while (CnpjVal == false);
+
 
                         Console.WriteLine($"Digite a razão social:");
                         novaPj.RazaoSocial = Console.ReadLine();
@@ -235,7 +282,10 @@ do
 
                         novaPj.Endereco = novoEndPj;
 
+                        metodosPj.inserir(novaPj);
+
                         listaPj.Add(novaPj);
+
 
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine($"Cadastro realizado com sucesso!");
@@ -245,34 +295,33 @@ do
                         break;
 
                     case "2":
-                        Console.Clear();
 
-                        if (listaPj.Count > 0)
+
+                        //if (listaPj.Count > 0)
+                        // {
+                        List<PessoaJuridica> ListaPj = metodosPj.LerArquivo();
+
+                        foreach (PessoaJuridica cadaitem in listaPj)
                         {
-                            foreach (PessoaJuridica PessoaPj in listaPj)
-                            {
-                                Console.Clear();
-                                Console.WriteLine(@$"
-    Nome: {PessoaPj.Nome}
-    Endereço: {PessoaPj.Endereco.Logradouro} N°: {PessoaPj.Endereco.Numero}
-    Razão Social: {PessoaPj.RazaoSocial}
-    CNPJ: {PessoaPj.Cnpj}, Valido: {(metodosPj.ValidarCnpj(PessoaPj.Cnpj) ? "Sim" : "Não")} 
-    Complemento: {PessoaPj.Endereco.Complemento}
+                            Console.Clear();
+                            Console.WriteLine(@$"
+    Nome: {cadaitem.Nome}
+    Razão Social: {cadaitem.RazaoSocial}
+    CNPJ: {cadaitem.Cnpj}
 ");
-
-                                Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.WriteLine($"Aperte ENTER para continuar");
-                                Console.ReadLine();
-                                Console.ResetColor();
-                            }
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine($"Aperte ENTER para continuar");
+                            Console.ReadLine();
+                            Console.ResetColor();
                         }
-                        else
-                        {
-                            Console.WriteLine($"Lista vazia :/");
-                            Thread.Sleep(3000);
-                        }
+                        // }
+                        // else
+                        //  {
+                        //      Console.WriteLine($"Lista vazia :/");
+                        //      Thread.Sleep(3000);
+                        //  }
                         break;
-                        case "0":
+                    case "0":
 
                         break;
                     default:
